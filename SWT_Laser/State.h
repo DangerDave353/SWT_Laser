@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 class State
 {
 
@@ -9,9 +8,7 @@ private:
 	int KoordinateX, KoordinateY;
 	bool LaserZustand;
 public:	
- State *currentState;
-	 State *lastState;
-	 State *nextState;
+
 	State();
 	State(bool laserZustand);
 	State(int x, int y);

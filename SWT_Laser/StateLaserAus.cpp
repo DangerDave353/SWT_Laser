@@ -1,8 +1,5 @@
 #include "stdafx.h"
-#include "StateBereit.h"
-#include "StateLaserAn.h"
 #include "StateLaserAus.h"
-#include "StateMove.h"
 #include <iostream>
 
 using namespace std;
