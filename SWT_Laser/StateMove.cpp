@@ -7,11 +7,16 @@
 
 using namespace std;
 
+extern State *currentState;
+extern State *lastState;
+extern State *nextState;
+
 StateMove::StateMove()
 {
 	KoordinateX = 0;
 	KoordinateY = 0;
 	LaserZustand = false;
+	
 
 }
 StateMove::StateMove(bool laserZustand)
@@ -36,29 +41,33 @@ StateMove::StateMove(int x, int y)
 	cout << "current State= MOVE(move)";
 	if (!LaserZustand)
 	{
-		nextState = new StateBereit(x, y);
+		cout << "next State = Bereit(move)";
+		*nextState = StateBereit(x, y);
 	}
 }
 bool NextState(bool laserZustand) 
 {
 	if (laserZustand)
 	{
-		nextState = new StateMove(currentState->KoordinateX, currentState->KoordinateY);
 		cout << "next State = MOVE(laser)";
+		*nextState = StateMove(currentState->getX(), currentState->getY());
+		
 		return true;
 	}
 	else
 	{
-		nextState = new StateLaserAus();
 		cout << "next State = Laser Aus";
+		*nextState = StateLaserAus();
+		
 		return true;
 	}
 	return false;
 }
 bool NextState(int x, int y) 
 {
-	nextState = new StateMove(x,y);
 	cout << "next State = MOVE(move)";
+	*nextState = StateMove(x,y);
+	
 	return true;
 }
 

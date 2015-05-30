@@ -3,17 +3,24 @@
 #include "StateLaserAn.h"
 #include "StateLaserAus.h"
 #include "StateMove.h"
+#include <iostream>
 
+using namespace std;
+
+extern State *currentState;
+extern State *lastState;
+extern State *nextState;
 
 StateLaserAn::StateLaserAn()
 {
-	KoordinateX = lastState->KoordinateX;
-	KoordinateY = lastState->KoordinateY;
+	this->KoordinateX = lastState->getX();
+	this->KoordinateY = lastState->getY();
 	LaserZustand = true;
 	
 	delete lastState;
 	lastState = currentState;
 	currentState = this;
+	cout << "current State = Laser An";
 	//GUI Aufruf
 }
 
@@ -23,19 +30,22 @@ bool NextState(bool laserZustand)
 
 	if (laserZustand)
 	{
-		nextState = new StateLaserAn();
+		cout << "next State = Laser An(laser)";
+		*nextState = StateLaserAn();
 		return true;
 	}
 	else
 	{
-		nextState = new StateLaserAus();
+		cout << "next State = Laser Aus(laser)";
+		*nextState = StateLaserAus();
 		return true;
 	}
 	return false;
 }
 bool NextState(int x, int y) 
 {
-	nextState = new StateMove(x,y);
+	cout << "next State = Move(move)";
+	*nextState = StateMove(x,y);
 	return true;
 }
 

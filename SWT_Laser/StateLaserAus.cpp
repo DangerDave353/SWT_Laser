@@ -3,7 +3,13 @@
 #include "StateLaserAn.h"
 #include "StateLaserAus.h"
 #include "StateMove.h"
+#include <iostream>
 
+using namespace std;
+
+extern State *currentState;
+extern State *lastState;
+extern State *nextState;
 
 StateLaserAus::StateLaserAus()
 {
@@ -11,10 +17,12 @@ StateLaserAus::StateLaserAus()
 	delete lastState;
 	lastState = currentState;
 	currentState = this;
+	cout << "current State = Laser Aus";
+	currentState->setX(lastState->getX());
+	currentState->setY(lastState->getY());
+	cout << "next State = Bereit";
+	nextState = new StateBereit(this->KoordinateX, this->KoordinateY);
 
-	currentState->KoordinateX = lastState->KoordinateX;
-	currentState->KoordinateY = lastState->KoordinateY;
-	nextState = new StateBereit(currentState->KoordinateX, currentState->KoordinateY);
 }
 bool NextState(bool laserZustand) 
 {

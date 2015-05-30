@@ -3,6 +3,7 @@
 class StateLaserAus : 
 	public State
 {
+
 private:
 	int KoordinateX, KoordinateY;
 	bool LaserZustand;

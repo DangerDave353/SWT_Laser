@@ -3,8 +3,15 @@
 #include "StateLaserAn.h"
 #include "StateLaserAus.h"
 #include "StateMove.h"
+#include <iostream>
 
-StateBereit::StateBereit()
+using namespace std;
+
+extern State *currentState;
+extern State *lastState;
+extern State *nextState;
+
+StateBereit::StateBereit()	//Initalisierungszustand
 {
 	KoordinateX = 0;
 	KoordinateY = 0;
@@ -18,9 +25,9 @@ StateBereit::StateBereit(bool laserZustand)
 	LaserZustand = laserZustand;
 
 	delete lastState;
-	lastState = currentState;
-	currentState = this;
-	
+	*lastState = *currentState;
+	*currentState = *this;
+	cout << "current State = Bereit(laser)";
 	//GUI Aufruf
 }
 StateBereit::StateBereit(int x, int y)
@@ -29,14 +36,15 @@ StateBereit::StateBereit(int x, int y)
 	KoordinateY = y;
 
 	delete lastState;
-	lastState = currentState;
-	currentState = this;
+	*lastState = *currentState;
+	*currentState = *this;
+	cout << "current State = Bereit(move)";
 	//GUI Aufruf
 }
 
 bool NextState(bool laserZustand) 
 {
-	if (currentState->LaserZustand)
+	if (currentState->getLaser())
 	{
 		return false;
 	}
@@ -44,12 +52,14 @@ bool NextState(bool laserZustand)
 	{
 		if (laserZustand)
 		{
-			nextState = new StateLaserAn();
+			cout << "next State = Laser An(laser)";
+			*nextState = StateLaserAn();
 			return true;
 		}
 		else
 		{
-			nextState = new StateBereit(currentState->KoordinateX, currentState->KoordinateY);
+			cout << "next State = Bereit(laser)";
+			*nextState = StateBereit(currentState->getX(), currentState->getY());
 			return true;
 		}
 	}
@@ -57,8 +67,9 @@ bool NextState(bool laserZustand)
 }
 bool NextState(int x, int y) 
 {
-	if (currentState->LaserZustand)
+	if (currentState->getLaser())
 	{
+		cout << "next State = Move(move)";
 		nextState = new StateMove(x, y);
 		return true;
 	}

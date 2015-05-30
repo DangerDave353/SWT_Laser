@@ -4,6 +4,7 @@
 class StateMove :
 	public State
 {
+
 private:
 	int KoordinateX, KoordinateY;
 	bool LaserZustand;
