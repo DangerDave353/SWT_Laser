@@ -1,10 +1,11 @@
 #pragma once
+#pragma warning(default:4716)
 
 
 class State
 {
 
-private:
+protected:
 	int KoordinateX, KoordinateY;
 	bool LaserZustand;
 public:	
@@ -18,8 +19,8 @@ public:
 	virtual void State::setY(int y);
 	virtual bool State::getLaser();
 	virtual void State::setLaser(bool zustand);
-	virtual bool NextState(bool laserZustand) = 0;
-	virtual bool NextState(int x, int y) = 0;
+	virtual bool State::NextState(bool laserZustand) = 0;
+	virtual bool State::NextState(int x, int y) = 0;
 	~State();
 };
 

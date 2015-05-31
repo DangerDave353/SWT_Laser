@@ -1,0 +1,43 @@
+﻿Der Buildvorgang wurde am 31.05.2015 13:57:23 gestartet.
+     1>Projekt "C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\SWT_Laser\SWT_Laser.vcxproj" auf Knoten "2", Build Ziel(e).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\SWT_Laser.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SWT_Laser.cpp State.cpp StateBereit.cpp StateLaserAn.cpp StateLaserAus.cpp StateMove.cpp
+         SWT_Laser.cpp
+         Code wird generiert...
+         Kompilieren...
+         StateMove.cpp
+         StateLaserAus.cpp
+         StateLaserAn.cpp
+         StateBereit.cpp
+         State.cpp
+         Code wird generiert...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\Debug\SWT_Laser.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\Debug\SWT_Laser.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\Debug\SWT_Laser.lib" /MACHINE:X86 Debug\State.obj
+         Debug\StateBereit.obj
+         Debug\StateLaserAn.obj
+         Debug\StateLaserAus.obj
+         Debug\StateMove.obj
+         Debug\stdafx.obj
+         Debug\SWT_Laser.obj
+     1>StateBereit.obj : error LNK2005: "bool __cdecl NextState(int,int)" (?NextState@@YA_NHH@Z) ist bereits in State.obj definiert.
+     1>StateBereit.obj : error LNK2005: "bool __cdecl NextState(bool)" (?NextState@@YA_N_N@Z) ist bereits in State.obj definiert.
+     1>StateLaserAn.obj : error LNK2005: "bool __cdecl NextState(int,int)" (?NextState@@YA_NHH@Z) ist bereits in State.obj definiert.
+     1>StateLaserAn.obj : error LNK2005: "bool __cdecl NextState(bool)" (?NextState@@YA_N_N@Z) ist bereits in State.obj definiert.
+     1>StateLaserAus.obj : error LNK2005: "bool __cdecl NextState(int,int)" (?NextState@@YA_NHH@Z) ist bereits in State.obj definiert.
+     1>StateLaserAus.obj : error LNK2005: "bool __cdecl NextState(bool)" (?NextState@@YA_N_N@Z) ist bereits in State.obj definiert.
+     1>StateMove.obj : error LNK2005: "bool __cdecl NextState(int,int)" (?NextState@@YA_NHH@Z) ist bereits in State.obj definiert.
+     1>StateMove.obj : error LNK2005: "bool __cdecl NextState(bool)" (?NextState@@YA_N_N@Z) ist bereits in State.obj definiert.
+     1>StateBereit.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateBereit::NextState(bool)" (?NextState@StateBereit@@UAE_N_N@Z)".
+     1>StateBereit.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateBereit::NextState(int,int)" (?NextState@StateBereit@@UAE_NHH@Z)".
+     1>StateLaserAn.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateLaserAn::NextState(bool)" (?NextState@StateLaserAn@@UAE_N_N@Z)".
+     1>StateLaserAn.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateLaserAn::NextState(int,int)" (?NextState@StateLaserAn@@UAE_NHH@Z)".
+     1>StateLaserAus.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateLaserAus::NextState(bool)" (?NextState@StateLaserAus@@UAE_N_N@Z)".
+     1>StateLaserAus.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateLaserAus::NextState(int,int)" (?NextState@StateLaserAus@@UAE_NHH@Z)".
+     1>StateMove.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateMove::NextState(bool)" (?NextState@StateMove@@UAE_N_N@Z)".
+     1>StateMove.obj : error LNK2001: Nicht aufgelöstes externes Symbol ""public: virtual bool __thiscall StateMove::NextState(int,int)" (?NextState@StateMove@@UAE_NHH@Z)".
+     1>C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\Debug\SWT_Laser.exe : fatal error LNK1120: 8 nicht aufgelöste Externe
+     1>Die Erstellung des Projekts "C:\Users\David\documents\visual studio 2013\Projects\SWT_Laser\SWT_Laser\SWT_Laser.vcxproj" ist abgeschlossen, Build Ziel(e) -- FEHLER.
+
+Fehler beim Buildvorgang.
+
+Verstrichene Zeit 00:00:02.34

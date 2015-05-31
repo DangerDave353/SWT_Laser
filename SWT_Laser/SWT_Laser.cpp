@@ -16,9 +16,9 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	char x;
-	State *currentState = NULL;
-	State *lastState = NULL;
-	State *nextState = NULL;
+	static State *currentState = NULL;
+	static State *lastState = NULL;
+	static State *nextState = NULL;
 	currentState = new StateBereit(0,0);	//Initalisierung des Grundzustands
 	
 	currentState->NextState(true);				//aufrufen der nächsten Zustände

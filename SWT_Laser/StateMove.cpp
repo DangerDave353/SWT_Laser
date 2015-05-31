@@ -8,6 +8,7 @@ extern State *currentState;
 extern State *lastState;
 extern State *nextState;
 
+
 StateMove::StateMove()
 {
 	KoordinateX = 0;

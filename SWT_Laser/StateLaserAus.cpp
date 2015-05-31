@@ -18,7 +18,7 @@ StateLaserAus::StateLaserAus()
 	currentState->setX(lastState->getX());
 	currentState->setY(lastState->getY());
 	cout << "next State = Bereit";
-	nextState = new StateBereit(this->KoordinateX, this->KoordinateY);
+	*nextState = StateBereit(this->KoordinateX, this->KoordinateY);
 
 }
 bool NextState(bool laserZustand) 

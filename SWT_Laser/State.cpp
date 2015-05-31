@@ -50,6 +50,16 @@ bool State::getLaser()
 	return LaserZustand;
 }
 
+
+bool NextState(int x, int y)
+{
+	return false;
+}
+
+bool NextState(bool laserZustand) 
+{
+	return false;
+}
 State::~State()
 {
 }

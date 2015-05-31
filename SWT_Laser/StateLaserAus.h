@@ -1,5 +1,9 @@
 #pragma once
 #include "State.h"
+#include "StateBereit.h"
+#include "StateLaserAn.h"
+#include "StateMove.h"
+
 class StateLaserAus : 
 	public State
 {
@@ -11,8 +15,8 @@ public:
 	StateLaserAus();
 	StateLaserAus(bool laserZustand);
 	StateLaserAus(int x, int y);
-	bool NextState(bool laserZustand);
-	bool NextState(int x, int y);
+	bool StateLaserAus::NextState(bool laserZustand);
+	bool StateLaserAus::NextState(int x, int y);
 
 	~StateLaserAus();
 };

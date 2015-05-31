@@ -4,9 +4,9 @@
 
 using namespace std;
 
-extern State *currentState;
-extern State *lastState;
-extern State *nextState;
+State *currentState;
+State *lastState;
+State *nextState;
 
 StateBereit::StateBereit()	//Initalisierungszustand
 {
@@ -67,7 +67,7 @@ bool NextState(int x, int y)
 	if (currentState->getLaser())
 	{
 		cout << "next State = Move(move)";
-		nextState = new StateMove(x, y);
+		*nextState = StateMove(x, y);
 		return true;
 	}
 		return false;
