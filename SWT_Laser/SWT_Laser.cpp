@@ -39,7 +39,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-
+//Ein Kommentar
 
 	cin >> x;
 	
