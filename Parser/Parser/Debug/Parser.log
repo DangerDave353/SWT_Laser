@@ -1,16 +1,15 @@
-﻿Der Buildvorgang wurde am 29.05.2015 13:35:21 gestartet.
-     1>Projekt "c:\Users\Steffen\documents\visual studio 2013\Projects\Parser\Parser\Parser.vcxproj" auf Knoten "2", Build Ziel(e).
+﻿Der Buildvorgang wurde am 10.06.2015 12:03:53 gestartet.
+     1>Projekt "C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Parser\Parser.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Parser.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Parser.cpp
          Parser.cpp
-     1>c:\users\steffen\documents\visual studio 2013\projects\parser\parser\parser.cpp(27): error C2664: 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::getline(_Elem *,std::streamsize,_Elem)' : Konvertierung von Argument 1 von 'std::string' in 'char *' nicht möglich
-                 with
-                 [
-                     _Elem=char
-                 ]
-                 Kein benutzerdefinierter Konvertierungsoperator verfügbar, der diese Konvertierung durchführen kann, oder der Operator kann nicht aufgerufen werden
-     1>Die Erstellung des Projekts "c:\Users\Steffen\documents\visual studio 2013\Projects\Parser\Parser\Parser.vcxproj" ist abgeschlossen, Build Ziel(e) -- FEHLER.
+       Link:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.lib" /MACHINE:X86 Debug\Main.obj
+         Debug\Parser.obj
+         Debug\stdafx.obj
+         Parser.vcxproj -> C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.exe
+     1>Die Erstellung des Projekts "C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Parser\Parser.vcxproj" ist abgeschlossen, Build Ziel(e).
 
-Fehler beim Buildvorgang.
+Build erfolgreich.
 
-Verstrichene Zeit 00:00:02.42
+Verstrichene Zeit 00:00:04.89

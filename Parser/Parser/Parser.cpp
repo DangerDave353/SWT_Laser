@@ -21,11 +21,24 @@ Parser::Parser(string Pfad)
 
 string Parser::LeseZeile(long ZeileNr)
 {
-	fstream OPCodes(Pfad, ios::in);
+
+	fstream OPCodes;
+	OPCodes.open(Pfad, ios::in);
+
 	cout << "readline" << endl;
+	
 	string Zeile;
-	//OPCodes.getline(Zeile, 1);
-	cout << Zeile;
+	
+
+	getline(OPCodes, Zeile, ';');
+
+	cout << Zeile << endl;
+
+	getline(OPCodes, Zeile, ';');
+
+	cout << Zeile << endl;
+
+	cout << "zuweit" << endl;
 
 	OPCodes.close();
 

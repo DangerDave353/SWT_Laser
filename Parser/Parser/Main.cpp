@@ -11,7 +11,7 @@ using namespace std;
 
 
 string test;
-char Pfad[200] = ("C:\\Users\Steffen\Documents\Visual Studio 2013\Projects\Parser\OPCodes.txt");
+char Pfad[200] = ("C:/Users/Steffen/Documents/GitHub/SWT_Laser/Parser/OPCodes.txt");
  
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -22,8 +22,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	test = p.LeseZeile(1);
 
-	cin >> test;
+	cin >> test ;
 	
+
 	return 0;
 
 }
