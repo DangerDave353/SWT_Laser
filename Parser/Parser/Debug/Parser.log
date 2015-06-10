@@ -1,0 +1,16 @@
+﻿Der Buildvorgang wurde am 29.05.2015 13:35:21 gestartet.
+     1>Projekt "c:\Users\Steffen\documents\visual studio 2013\Projects\Parser\Parser\Parser.vcxproj" auf Knoten "2", Build Ziel(e).
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Parser.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Parser.cpp
+         Parser.cpp
+     1>c:\users\steffen\documents\visual studio 2013\projects\parser\parser\parser.cpp(27): error C2664: 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::getline(_Elem *,std::streamsize,_Elem)' : Konvertierung von Argument 1 von 'std::string' in 'char *' nicht möglich
+                 with
+                 [
+                     _Elem=char
+                 ]
+                 Kein benutzerdefinierter Konvertierungsoperator verfügbar, der diese Konvertierung durchführen kann, oder der Operator kann nicht aufgerufen werden
+     1>Die Erstellung des Projekts "c:\Users\Steffen\documents\visual studio 2013\Projects\Parser\Parser\Parser.vcxproj" ist abgeschlossen, Build Ziel(e) -- FEHLER.
+
+Fehler beim Buildvorgang.
+
+Verstrichene Zeit 00:00:02.42
