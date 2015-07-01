@@ -45,19 +45,26 @@ string Parser::naechsteZeile()
 	}
 	if( !OPCodes.eof() )
 	{
-		cout << Zeile << endl;	//ausgabe der Zeile
+		//test
+		//cout << Zeile << endl;	//ausgabe der Zeile
 		aktuelleZeile++;
 	}
 	else
-	{
-		cout << "EOF" << endl; //ausgabe für EOF
+	{	
+		//test
+		//cout << "EOF" << endl; //ausgabe für EOF
 	}
-	//Test \/
+	
 	if (!OPCodes.eof())
 	{
 		interpretiere(Zeile);
 	}
-	//Test /\
+	else
+	{	
+		//bei Ende (Case 2 vorweggenommen)
+		befehl.setBefehlNr(-2);
+	}
+	
 
 	OPCodes.close();
 
@@ -71,6 +78,7 @@ void Parser::interpretiere(string Zeile)
 	int Case;
 	/*
 	Cases:
+		-2 - EoF
 		-1 - Kommentar oder Leerzeile 
 		0 - Fehler
 		1 - Laser
@@ -107,7 +115,8 @@ void Parser::interpretiere(string Zeile)
 	switch (Case)
 	{
 	default:
-		cout << "Undefinierter Case" << endl;
+		//test
+		//cout << "Undefinierter Case" << endl;
 		break;
 	case 0:
 		cout << "Fehler" << endl;
@@ -116,11 +125,16 @@ void Parser::interpretiere(string Zeile)
 		
 		break;
 	case -1:
-		cout << "Kommentar oder Leer" << endl;
+		//test
+		//cout << "Kommentar oder Leer" << endl;
+		
 		naechsteZeile();
+		
 		break;
 	case 1:
-		cout << "Laser" << endl;
+
+		//test
+		//cout << "Laser" << endl;
 
 		befehl.setBefehlNr(1);
 
@@ -128,7 +142,9 @@ void Parser::interpretiere(string Zeile)
 		if (Zeile.find("ON") != string::npos)
 		{
 			//on setzen
-			cout << "on" << endl;
+			
+			//test
+			//cout << "on" << endl;
 
 			befehl.setLaser(true);
 
@@ -136,7 +152,9 @@ void Parser::interpretiere(string Zeile)
 		else if (Zeile.find("OFF") != string::npos)
 		{
 			//off setzen
-			cout << "off" << endl;
+			
+			//test
+			//cout << "off" << endl;
 
 			befehl.setLaser(false);
 
@@ -144,12 +162,13 @@ void Parser::interpretiere(string Zeile)
 		else
 		{
 			//fehler ausgeben
-			cout << "fehler in on/off bestimmung" << endl;
+			//cout << "fehler in on/off bestimmung" << endl;
 		}
 
 		break;
 	case 2:
-		cout << "Move" << endl;
+		//test
+		//cout << "Move" << endl;
 
 		befehl.setBefehlNr(2);
 
@@ -157,7 +176,11 @@ void Parser::interpretiere(string Zeile)
 		int posXende;
 		int posYanfang;
 		int posYende;
+		int Xlaenge;
+		int Ylaenge;
 		int x,y;
+		string strX;
+		string strY;
 		
 		//ermittlung X anfang
 		for (int i = 0; i<Zeile.length();i++)
@@ -180,7 +203,7 @@ void Parser::interpretiere(string Zeile)
 			}
 		}
 		//ermittlung Y anfang
-		for (int i = posXende; i<Zeile.length(); i++)
+		for (int i = posXende+1; i<Zeile.length(); i++)
 		{
 			char h = Zeile[i];
 			if (isdigit(h))
@@ -190,7 +213,7 @@ void Parser::interpretiere(string Zeile)
 			}
 		}
 		//ermittlung Y ende
-		for (int i = posYanfang; i<Zeile.length(); i++)
+		for (int i = posYanfang; i <= Zeile.length(); i++)
 		{
 			char h = Zeile[i];
 			if (!isdigit(h))
@@ -198,9 +221,34 @@ void Parser::interpretiere(string Zeile)
 				posYende = i - 1;
 				break;
 			}
+		}
+		
+		//debug ausgabe
+		//cout << posXanfang << posXende << posYanfang << posYende << endl;
 
-		//cout <<  << endl;
-		// HIER WEITER
+		//X zusammensetzen
+		
+		Xlaenge = (posXende + 1) - posXanfang;
+
+		strX = Zeile.substr(posXanfang, Xlaenge);
+		
+		Ylaenge = (posYende + 1) - posYanfang;
+
+		strY = Zeile.substr(posYanfang, Ylaenge);
+
+		//test
+		//cout << "String: " << "X: " << strX << " " << "Y: " << strY << endl;
+
+		x = stoi(strX);
+
+		y = stoi(strY);
+
+		//test
+		//cout << "Int: " << "X: " << x << " " << "Y: " << y << endl;
+
+		befehl.setX(x);
+		befehl.setY(y);
+
 		break;
 
 	}
