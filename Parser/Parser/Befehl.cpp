@@ -8,6 +8,7 @@ using namespace std;
 
 /*
 Befehlsnummern:
+	-1 - Ender der Datei
 	0 - Fehler
 	1 - Laser
 	2 - Move

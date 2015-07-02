@@ -1,3 +1,27 @@
+/*
+Parser
+
+Der Parser ist dafür zuständig die einzelnen Befehle aus der OPCodes.txt zu lesen, danach zu interpretieren
+und den entsprechenden Befehl in ein Objekt der Übergabeklasse Befehl zu schreiben.
+
+Parser(string Pfad)
+ist der Konstruktor, ihm muss der Pfad zur OPCodes.txt als string übergeben werden.
+Er erstellt das Objekt von Befehl.
+
+Befehl* getBefehlsobjekt() 
+übergibt den Pointer auf das Befehlsobjekt.
+
+int getAnzahlBefehle()
+Liefert die Anzahl an möglichen Befehlen als Integer Zahl zurück, 
+hierbei werden nur leere Zeilen und Kommentare gefiltert.
+
+void naechsteZeile()
+Ließt die nächste Zeile der txt aus und ruft dann void interpretiere(string Zeile) auf.
+
+void interpretiere(string Zeile)
+Filtert aus dem Übergebenen String den jeweiligen Befehl herraus und Schreibt ihn in das Befehlsobjekt.
+
+*/
 #include "stdafx.h"
 #include "Parser.h"
 #include "Befehl.h"
@@ -21,9 +45,9 @@ Parser::Parser()
 
 Parser::Parser(string Pfad)
 {
-	//Contructor
+	//Kontruktor
 	::Pfad = Pfad; //übergebener Pfad wird global gespeichert
-	befehl = Befehl::Befehl();
+	befehl = Befehl::Befehl(); //Befehlsobjekt wird erzeugt
 
 }
 
@@ -34,7 +58,6 @@ Befehl* Parser::getBefehlsobjekt()
 
 void Parser::naechsteZeile()
 {
-	//ließt die nächste Zeile aus dem Textdokument aus
 	fstream OPCodes;
 	OPCodes.open(Pfad, ios::in);	//öffnen des Lesestreams
 
@@ -43,33 +66,39 @@ void Parser::naechsteZeile()
 	{
 		Zeile[i] = toupper(Zeile[i]);
 	}
-	
+	//--
+
+	//Springen zur richtigen Zeile und auslesen
 	for (int i = 0; i < aktuelleZeile; i++)
 	{
-		getline(OPCodes, Zeile); //Springen zur richtigen Zeile und auslesen
+		getline(OPCodes, Zeile); //Auslesen in die Variable Zeile
 	}
+	//--
+
+	//aktuellenZeilen Counter erhöhen, falls das Ende der txt noch nicht erreicht wurde
 	if( !OPCodes.eof() )
 	{
-		//test
-		//cout << Zeile << endl;	//ausgabe der Zeile
+		//cout << Zeile << endl;	//Debugausgabe
 		aktuelleZeile++;
 	}
 	else
 	{	
-		//test
-		//cout << "EOF" << endl; //ausgabe für EOF
+		//cout << "EOF" << endl; //Debugausgabe
 	}
-	
+	//--
+
+	//Unterscheidung ob zu interprätierender Text oder das Ende der Datei vorhanden ist
 	if (!OPCodes.eof())
 	{
+		//Einsprung in die interpretiere Funktion
 		interpretiere(Zeile);
 	}
 	else
 	{	
-		//bei Ende (Case 2 vorweggenommen)
-		befehl.setBefehlNr(-2);
+		//bei Ende der Datei (Case -1 vorweggenommen)
+		befehl.setBefehlNr(-1);
 	}
-	
+	//--
 
 	OPCodes.close();
 
@@ -81,6 +110,9 @@ void Parser::interpretiere(string Zeile)
 	string Kriterium;
 	int Case;
 	/*
+
+	Die Cases sind Global mit der gleichen Nummer versehen, deshalb hier nochmal -1 obwohl er hier nicht benutzt wird
+
 	Cases:
 		-2	- Kommentar oder Leerzeile 
 		-1	- EoF
@@ -89,17 +121,18 @@ void Parser::interpretiere(string Zeile)
 		2	- Move
 	*/
 
-
+	//Auslese des ersten Zeichens
 	if (Zeile != "")
 	{
-		ErstesZeichen = Zeile.at(0);
+		ErstesZeichen = Zeile.at(0); //Auslesen des ersten Zeichens falls nicht leer
 	}
 	else
 	{
 		ErstesZeichen = "";
 	}
+	//--
 
-	// Befehl Herausfinden
+	//Herausfinden ob oder welcher gültige Befehl sich im String befindet
 	if (ErstesZeichen == "#" || ErstesZeichen == "\0")	//Kommentarabfrage
 	{
 		Case = -2; 
@@ -112,34 +145,33 @@ void Parser::interpretiere(string Zeile)
 	{
 		Case = 2;
 	}
-	else 
+	else	//Ungültiger Befehl
 	{
 		Case = 0;
 	}
+	//--
 
+	//Konditionen auslesen und in Das Befehlsobjekt schreiben
 	switch (Case)
 	{
 	default:
-		//test
-		//cout << "Undefinierter Case" << endl;
+		//cout << "Undefinierter Case" << endl; //Debugausgabe
 		break;
 	case 0:
-		cout << "Fehler" << endl;
+		//cout << "Fehler" << endl;	//Debugausgabe
 
 		befehl.setBefehlNr(0);
 		
 		break;
 	case -2:
-		//test
-		//cout << "Kommentar oder Leer" << endl;
-		
+		//cout << "Kommentar oder Leer" << endl; //Debugausgabe
+
 		naechsteZeile();
 		
 		break;
 	case 1:
 
-		//test
-		//cout << "Laser" << endl;
+		//cout << "Laser" << endl;	//Debugausgabe
 
 		befehl.setBefehlNr(1);
 
@@ -148,8 +180,7 @@ void Parser::interpretiere(string Zeile)
 		{
 			//on setzen
 			
-			//test
-			//cout << "on" << endl;
+			//cout << "on" << endl;	//Debugausgabe
 
 			befehl.setLaser(true);
 
@@ -158,8 +189,7 @@ void Parser::interpretiere(string Zeile)
 		{
 			//off setzen
 			
-			//test
-			//cout << "off" << endl;
+			//cout << "off" << endl;	//Debugausgabe
 
 			befehl.setLaser(false);
 
@@ -167,13 +197,12 @@ void Parser::interpretiere(string Zeile)
 		else
 		{
 			//fehler ausgeben
-			//cout << "fehler in on/off bestimmung" << endl;
+			//cout << "fehler in on/off bestimmung" << endl;	//Debugausgabe
 		}
-
+		//--
 		break;
 	case 2:
-		//test
-		//cout << "Move" << endl;
+		//cout << "Move" << endl;	//Debugausgabe
 
 		befehl.setBefehlNr(2);
 
@@ -197,6 +226,8 @@ void Parser::interpretiere(string Zeile)
 				break;
 			}
 		}
+		//--
+
 		//ermittlung X ende
 		for (int i = posXanfang; i<Zeile.length(); i++)
 		{
@@ -207,6 +238,8 @@ void Parser::interpretiere(string Zeile)
 				break;
 			}
 		}
+		//--
+
 		//ermittlung Y anfang
 		for (int i = posXende+1; i<Zeile.length(); i++)
 		{
@@ -217,6 +250,8 @@ void Parser::interpretiere(string Zeile)
 				break;
 			}
 		}
+		//--
+
 		//ermittlung Y ende
 		for (int i = posYanfang; i <= Zeile.length(); i++)
 		{
@@ -227,32 +262,33 @@ void Parser::interpretiere(string Zeile)
 				break;
 			}
 		}
+		//--
 		
-		//debug ausgabe
-		//cout << posXanfang << posXende << posYanfang << posYende << endl;
+		//cout << posXanfang << posXende << posYanfang << posYende << endl;	//Debugausgabe
 
-		//X zusammensetzen
-		
+		//X-String herauskopieren
 		Xlaenge = (posXende + 1) - posXanfang;
-
 		strX = Zeile.substr(posXanfang, Xlaenge);
-		
+		//--
+
+		//Y-String herauskopieren
 		Ylaenge = (posYende + 1) - posYanfang;
-
 		strY = Zeile.substr(posYanfang, Ylaenge);
+		//--
 
-		//test
-		//cout << "String: " << "X: " << strX << " " << "Y: " << strY << endl;
+		//cout << "String: " << "X: " << strX << " " << "Y: " << strY << endl;	//Debugausgabe
 
+		// X- und Y-Strings in Integer umwandeln
 		x = stoi(strX);
-
 		y = stoi(strY);
+		//--
 
-		//test
-		//cout << "Int: " << "X: " << x << " " << "Y: " << y << endl;
+		//cout << "Int: " << "X: " << x << " " << "Y: " << y << endl;	//Debugausgabe
 
+		//Schreiben der X- und Y-Werte in das Befehlsobjekt
 		befehl.setX(x);
 		befehl.setY(y);
+		//--
 
 		break;
 
@@ -269,11 +305,13 @@ int Parser::getAnzahlBefehle()
 	string HilfsZeile;
 	string ErstesZeichen;
 
-	while (!OPCodes.eof())
+	//Inkrementierung der Anzahl
+	while (!OPCodes.eof()) //wiederholen bis EoF erreicht ist
 	{
-		getline(OPCodes, HilfsZeile);
+		getline(OPCodes, HilfsZeile);	//auslesen der Zeile
 
-		if (HilfsZeile != "")
+		//Erstes Zeichen auslesen
+		if (HilfsZeile != "")	//Leer Überprüfung
 		{
 			ErstesZeichen = HilfsZeile.at(0);
 		}
@@ -281,13 +319,16 @@ int Parser::getAnzahlBefehle()
 		{
 			ErstesZeichen = "";
 		}
+		//--
 
-		// Herausfinden ob Leer oder Kommentar
-		if (!(ErstesZeichen == "#" || ErstesZeichen == "\0"))	//Kommentarabfrage
+		// Herausfinden ob Kommentar
+		if (!(ErstesZeichen == "#" || ErstesZeichen == "\0"))	//Kommentarabfrage und EoFabfrage zur Anzahlkorrektur
 		{
 			Anzahl++;
 		}
+		//--
 	}
+	//--
 
 	OPCodes.close();
 	return(Anzahl);
