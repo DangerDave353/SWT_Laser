@@ -61,17 +61,17 @@ void Parser::naechsteZeile()
 	fstream OPCodes;
 	OPCodes.open(Pfad, ios::in);	//öffnen des Lesestreams
 
-	//Umwandlung von lowercase in uppercase
-	for (int i = 0; i < Zeile.length(); i++)
-	{
-		Zeile[i] = toupper(Zeile[i]);
-	}
-	//--
-
 	//Springen zur richtigen Zeile und auslesen
 	for (int i = 0; i < aktuelleZeile; i++)
 	{
 		getline(OPCodes, Zeile); //Auslesen in die Variable Zeile
+	}
+	//--
+
+	//Umwandlung von lowercase in uppercase
+	for (int i = 0; i < Zeile.length(); i++)
+	{
+		Zeile[i] = toupper(Zeile[i]);
 	}
 	//--
 
@@ -159,9 +159,10 @@ void Parser::interpretiere(string Zeile)
 		break;
 	case 0:
 		//cout << "Fehler" << endl;	//Debugausgabe
+		befehl.setFehler("Ungültiger Befehl in Zeile: " + Zeile);
 
 		befehl.setBefehlNr(0);
-		
+
 		break;
 	case -2:
 		//cout << "Kommentar oder Leer" << endl; //Debugausgabe
@@ -198,6 +199,8 @@ void Parser::interpretiere(string Zeile)
 		{
 			//fehler ausgeben
 			//cout << "fehler in on/off bestimmung" << endl;	//Debugausgabe
+			befehl.setFehler("Ungültiger Zustand (ON/OFF) in Zeile: " + Zeile);
+			befehl.setBefehlNr(0);
 		}
 		//--
 		break;
@@ -217,14 +220,22 @@ void Parser::interpretiere(string Zeile)
 		string strY;
 		
 		//ermittlung X anfang
+		bool xAnfangExist = false;
 		for (int i = 0; i<Zeile.length();i++)
 		{
 			char h = Zeile[i];
 			if (isdigit(h))
 			{
 				posXanfang = i;
+				xAnfangExist = true;
 				break;
 			}
+		}
+		if (!(xAnfangExist))
+		{
+			befehl.setFehler("Keine Koordinate gefunden in Zeile: " + Zeile);
+			befehl.setBefehlNr(0);
+			break;
 		}
 		//--
 
@@ -241,14 +252,22 @@ void Parser::interpretiere(string Zeile)
 		//--
 
 		//ermittlung Y anfang
+		bool yAnfangExist = false;
 		for (int i = posXende+1; i<Zeile.length(); i++)
 		{
 			char h = Zeile[i];
 			if (isdigit(h))
 			{
 				posYanfang = i;
+				yAnfangExist = true;
 				break;
 			}
+		}
+		if (!(yAnfangExist))
+		{
+			befehl.setFehler("Keine zweite Koordinate gefunden in Zeile: " + Zeile);
+			befehl.setBefehlNr(0);
+			break;
 		}
 		//--
 
@@ -266,23 +285,34 @@ void Parser::interpretiere(string Zeile)
 		
 		//cout << posXanfang << posXende << posYanfang << posYende << endl;	//Debugausgabe
 
+		//Fehlerabfrage
+		if ((posXanfang <= 0) || (posXanfang > Zeile.length()) ||
+			(posXende <= 0) || (posXende > Zeile.length()) ||
+			(posYanfang <= 0) || (posYanfang > Zeile.length()) ||
+			(posYende <= 0) || (posYende > Zeile.length()) )
+		{
+			befehl.setFehler("Fehler in der Koordinatenfindung in Zeile: " + Zeile);
+			befehl.setBefehlNr(0);
+		}
+		//--
+
 		//X-String herauskopieren
 		Xlaenge = (posXende + 1) - posXanfang;
 		strX = Zeile.substr(posXanfang, Xlaenge);
 		//--
-
+		
 		//Y-String herauskopieren
 		Ylaenge = (posYende + 1) - posYanfang;
 		strY = Zeile.substr(posYanfang, Ylaenge);
 		//--
-
+		
 		//cout << "String: " << "X: " << strX << " " << "Y: " << strY << endl;	//Debugausgabe
 
 		// X- und Y-Strings in Integer umwandeln
 		x = stoi(strX);
 		y = stoi(strY);
 		//--
-
+		
 		//cout << "Int: " << "X: " << x << " " << "Y: " << y << endl;	//Debugausgabe
 
 		//Schreiben der X- und Y-Werte in das Befehlsobjekt

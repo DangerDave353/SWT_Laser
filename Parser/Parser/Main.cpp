@@ -37,6 +37,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << "X	" << b.getX() << endl;
 		cout << "Y	" << b.getY() << endl;
 		cout << "Laser	" << b.getLaser() << endl;
+		cout << "Fehler	" << b.getFehler() << endl;
 		cout << "----------- Main - Werte aus Befehl -----------" << endl;
 		
 		cin >> test;
