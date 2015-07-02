@@ -26,7 +26,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	//einbinden Befehl
 	Befehl b = *(p.getBefehlsobjekt());
 
-
+	cout << "Anzahl der Befehle: " << p.getAnzahlBefehle() << endl;
 
 	while (running)
 	{

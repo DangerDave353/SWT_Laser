@@ -15,9 +15,10 @@ public:
 	Parser();
 	Parser(string Pfad);
 	
-	string naechsteZeile();
+	void naechsteZeile();
 	void interpretiere(string Zeile);
 	Befehl* getBefehlsobjekt();
+	int getAnzahlBefehle();
 
 	~Parser();
 };

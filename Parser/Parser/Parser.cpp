@@ -31,7 +31,7 @@ Befehl* Parser::getBefehlsobjekt()
 	return &befehl;
 }
 
-string Parser::naechsteZeile()
+void Parser::naechsteZeile()
 {
 	//lieﬂt die n‰chste Zeile aus dem Textdokument aus
 	fstream OPCodes;
@@ -68,7 +68,6 @@ string Parser::naechsteZeile()
 
 	OPCodes.close();
 
-	return("a");
 }
 
 void Parser::interpretiere(string Zeile)
@@ -78,11 +77,11 @@ void Parser::interpretiere(string Zeile)
 	int Case;
 	/*
 	Cases:
-		-2 - EoF
-		-1 - Kommentar oder Leerzeile 
-		0 - Fehler
-		1 - Laser
-		2 - Move
+		-2	- Kommentar oder Leerzeile 
+		-1	- EoF
+		0	- Fehler
+		1	- Laser
+		2	- Move
 	*/
 
 	if (Zeile != "")
@@ -97,13 +96,13 @@ void Parser::interpretiere(string Zeile)
 	// Befehl Herausfinden
 	if (ErstesZeichen == "#" || ErstesZeichen == "\0")	//Kommentarabfrage
 	{
-		Case = -1; 
+		Case = -2; 
 	}
-	else if (Zeile.find("LASER") != string::npos)
+	else if (Zeile.find("LASER") != string::npos)	//Laser
 	{
 		Case = 1;
 	}
-	else if (Zeile.find("MOVE") != string::npos)
+	else if (Zeile.find("MOVE") != string::npos)	//Move
 	{
 		Case = 2;
 	}
@@ -124,7 +123,7 @@ void Parser::interpretiere(string Zeile)
 		befehl.setBefehlNr(0);
 		
 		break;
-	case -1:
+	case -2:
 		//test
 		//cout << "Kommentar oder Leer" << endl;
 		
@@ -252,6 +251,40 @@ void Parser::interpretiere(string Zeile)
 		break;
 
 	}
+
+}
+
+int Parser::getAnzahlBefehle()
+{
+	int Anzahl = 0;
+
+	fstream OPCodes;
+	OPCodes.open(Pfad, ios::in);	//ˆffnen des Lesestreams
+	string HilfsZeile;
+	string ErstesZeichen;
+
+	while (!OPCodes.eof())
+	{
+		getline(OPCodes, HilfsZeile);
+
+		if (HilfsZeile != "")
+		{
+			ErstesZeichen = HilfsZeile.at(0);
+		}
+		else
+		{
+			ErstesZeichen = "";
+		}
+
+		// Herausfinden ob Leer oder Kommentar
+		if (!(ErstesZeichen == "#" || ErstesZeichen == "\0"))	//Kommentarabfrage
+		{
+			Anzahl++;
+		}
+	}
+
+	OPCodes.close();
+	return(Anzahl);
 
 }
 
