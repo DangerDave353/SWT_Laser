@@ -18,11 +18,13 @@ int BefehlNr;
 int X;
 int Y;
 bool Laser;
+string Fehler;
 
 int Befehl::getBefehlNr()
 {
 	return(BefehlNr);
 }
+
 void Befehl::setBefehlNr(int BefehlNr)
 {
 	::BefehlNr = BefehlNr;
@@ -32,6 +34,7 @@ int Befehl::getX()
 {
 	return(X);
 }
+
 void Befehl::setX(int X)
 {
 	::X = X;
@@ -41,6 +44,7 @@ int Befehl::getY()
 {
 	return(Y);
 }
+
 void Befehl::setY(int Y)
 {
 	::Y = Y;
@@ -50,15 +54,25 @@ bool Befehl::getLaser()
 {
 	return(Laser);
 }
+
 void Befehl::setLaser(bool Laser)
 {
 	::Laser = Laser;
 }
 
+string Befehl::getFehler()
+{
+	return(Fehler);
+}
+
+void Befehl::setFehler(string Fehler)
+{
+	::Fehler = Fehler;
+}
+
 Befehl::Befehl()
 {
 }
-
 
 Befehl::~Befehl()
 {

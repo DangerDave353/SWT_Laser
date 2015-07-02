@@ -19,6 +19,7 @@ public:
 	void setY(int Y);
 	bool getLaser();
 	void setLaser(bool Laser);
-	
+	string getFehler();
+	void setFehler(string Fehler);
 };
 
