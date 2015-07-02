@@ -5,6 +5,7 @@
 #include <string>
 #include "Befehl.h"
 #include <ctype.h>
+#include <algorithm>
 
 using namespace std;
 

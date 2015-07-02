@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include <ctype.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -37,7 +38,11 @@ void Parser::naechsteZeile()
 	fstream OPCodes;
 	OPCodes.open(Pfad, ios::in);	//öffnen des Lesestreams
 
-	
+	//Umwandlung von lowercase in uppercase
+	for (int i = 0; i < Zeile.length(); i++)
+	{
+		Zeile[i] = toupper(Zeile[i]);
+	}
 	
 	for (int i = 0; i < aktuelleZeile; i++)
 	{
@@ -83,6 +88,7 @@ void Parser::interpretiere(string Zeile)
 		1	- Laser
 		2	- Move
 	*/
+
 
 	if (Zeile != "")
 	{
