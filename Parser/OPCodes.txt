@@ -1,3 +1,10 @@
+laser on
+move 10 5
+laser o
+move 50
+move
+lol
+
 ## T
 LASER ON
 MOVE 50, 0

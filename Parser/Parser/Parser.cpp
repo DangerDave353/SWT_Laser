@@ -340,10 +340,17 @@ int Parser::getAnzahlBefehle()
 	{
 		getline(OPCodes, HilfsZeile);	//auslesen der Zeile
 
-		//Erstes Zeichen auslesen
-		if (HilfsZeile != "")	//Leer Überprüfung
+		//Umwandlung von lowercase in uppercase
+		for (int i = 0; i < HilfsZeile.length(); i++)
 		{
-			ErstesZeichen = HilfsZeile.at(0);
+			HilfsZeile[i] = toupper(HilfsZeile[i]);
+		}
+		//--
+
+		//Auslese des ersten Zeichens
+		if (HilfsZeile != "")
+		{
+			ErstesZeichen = HilfsZeile.at(0); //Auslesen des ersten Zeichens falls nicht leer
 		}
 		else
 		{
@@ -351,12 +358,174 @@ int Parser::getAnzahlBefehle()
 		}
 		//--
 
-		// Herausfinden ob Kommentar
-		if (!(ErstesZeichen == "#" || ErstesZeichen == "\0"))	//Kommentarabfrage und EoFabfrage zur Anzahlkorrektur
+		int Case;
+
+		//Herausfinden ob oder welcher gültige Befehl sich im String befindet
+		if (ErstesZeichen == "#" || ErstesZeichen == "\0")	//Kommentarabfrage
 		{
-			Anzahl++;
+			Case = -2;
+		}
+		else if (HilfsZeile.find("LASER") != string::npos)	//Laser
+		{
+			Case = 1;
+		}
+		else if (HilfsZeile.find("MOVE") != string::npos)	//Move
+		{
+			Case = 2;
+		}
+		else	//Ungültiger Befehl
+		{
+			Case = 0;
 		}
 		//--
+
+		//Konditionen auslesen und in Das Befehlsobjekt schreiben
+		switch (Case)
+		{
+		default:
+			//cout << "Undefinierter Case" << endl; //Debugausgabe
+			break;
+		case 0:
+			//cout << "Fehler" << endl;	//Debugausgabe
+			
+			befehl.setFehler(befehl.getFehler() + "\nUngültiger Befehl in Zeile: " + HilfsZeile);
+			befehl.setBefehlNr(0);
+			
+			break;
+		case -2:
+			//cout << "Kommentar oder Leer" << endl; //Debugausgabe
+
+
+			break;
+		case 1:
+
+			//cout << "Laser" << endl;	//Debugausgabe
+
+			//on oder off unterscheidung
+			if (HilfsZeile.find("ON") != string::npos)
+			{
+				//on setzen
+
+				//cout << "on" << endl;	//Debugausgabe
+				Anzahl++;
+				
+			}
+			else if (HilfsZeile.find("OFF") != string::npos)
+			{
+				//off setzen
+
+				//cout << "off" << endl;	//Debugausgabe
+				Anzahl++;
+
+			}
+			else
+			{
+				//fehler ausgeben
+				//cout << "fehler in on/off bestimmung" << endl;	//Debugausgabe
+				befehl.setFehler(befehl.getFehler() + "\nUngültiger Zustand (ON/OFF) in Zeile: " + HilfsZeile);
+				befehl.setBefehlNr(0);
+			}
+			//--
+			break;
+		case 2:
+			//cout << "Move" << endl;	//Debugausgabe
+
+			
+			int posXanfang;
+			int posXende;
+			int posYanfang;
+			int posYende;
+			int Xlaenge;
+			int Ylaenge;
+			int x, y;
+			string strX;
+			string strY;
+
+			//ermittlung X anfang
+			bool xAnfangExist = false;
+			for (int i = 0; i<HilfsZeile.length(); i++)
+			{
+				char h = HilfsZeile[i];
+				if (isdigit(h))
+				{
+					posXanfang = i;
+					xAnfangExist = true;
+					break;
+				}
+			}
+			if (!(xAnfangExist))
+			{
+				befehl.setFehler(befehl.getFehler() + "\nKeine Koordinate gefunden in Zeile: " + HilfsZeile);
+				befehl.setBefehlNr(0);
+				break;
+			}
+			//--
+
+			//ermittlung X ende
+			for (int i = posXanfang; i<HilfsZeile.length(); i++)
+			{
+				char h = HilfsZeile[i];
+				if (!isdigit(h))
+				{
+					posXende = i - 1;
+					break;
+				}
+			}
+			//--
+
+			//ermittlung Y anfang
+			bool yAnfangExist = false;
+			for (int i = posXende + 1; i<HilfsZeile.length(); i++)
+			{
+				char h = HilfsZeile[i];
+				if (isdigit(h))
+				{
+					posYanfang = i;
+					yAnfangExist = true;
+					break;
+				}
+			}
+			if (!(yAnfangExist))
+			{
+				befehl.setFehler(befehl.getFehler() + "\nKeine zweite Koordinate gefunden in Zeile: " + HilfsZeile);
+				befehl.setBefehlNr(0);
+				break;
+			}
+			//--
+
+			//ermittlung Y ende
+			for (int i = posYanfang; i <= HilfsZeile.length(); i++)
+			{
+				char h = HilfsZeile[i];
+				if (!isdigit(h))
+				{
+					posYende = i - 1;
+					break;
+				}
+			}
+			//--
+
+			//cout << posXanfang << posXende << posYanfang << posYende << endl;	//Debugausgabe
+
+			//Fehlerabfrage
+			if ((posXanfang <= 0) || (posXanfang > HilfsZeile.length()) ||
+				(posXende <= 0) || (posXende > HilfsZeile.length()) ||
+				(posYanfang <= 0) || (posYanfang > HilfsZeile.length()) ||
+				(posYende <= 0) || (posYende > HilfsZeile.length()))
+			{
+				befehl.setFehler(befehl.getFehler() + "\nFehler in der Koordinatenfindung in Zeile: " + HilfsZeile);
+				befehl.setBefehlNr(0);
+			}
+			else
+			{
+				Anzahl++;
+			}
+			
+			break;
+
+		}
+
+		
 	}
 	//--
 

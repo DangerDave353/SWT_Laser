@@ -1,6 +1,9 @@
-﻿Der Buildvorgang wurde am 02.07.2015 16:32:28 gestartet.
+﻿Der Buildvorgang wurde am 03.07.2015 12:10:37 gestartet.
      1>Projekt "C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Parser\Parser.vcxproj" auf Knoten "2", Build Ziel(e).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Parser.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+       Link:
          C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Steffen\Documents\GitHub\SWT_Laser\Parser\Debug\Parser.lib" /MACHINE:X86 Debug\Befehl.obj
          Debug\Main.obj
          Debug\Parser.obj
@@ -10,4 +13,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:02.15
+Verstrichene Zeit 00:00:04.51
