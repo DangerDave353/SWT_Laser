@@ -1,66 +1,68 @@
 #include "control.h"
-#include "state.h"
-#include "statebereit.h"
-#include "main.h"
-
-using namespace std;
 
 
-
-
-void Control::setUi(Ui::Main *value)
+Control::Control( Ui::MainWindow *ui)
 {
-    ui = value;
-}
-Control::Control()
-{
-
-    aktuellerZustand = nullptr;
-    letzterZustand= nullptr;
+    GUI=ui;
+letzterZustand=nullptr;
+aktuellerZustand=nullptr;
 naechsterZustand=nullptr;
-aktuellerZustand = new StateBereit(aktuellerZustand,ui );
 
 }
 
 void Control::naechstenBefehl()
 {
-    //nächsten Befehl vom Parser holen
+
 }
 
 void Control::ZustandAktualisieren()
 {
-    letzterZustand=aktuellerZustand;
-    aktuellerZustand=naechsterZustand;
-}
+letzterZustand=aktuellerZustand;
+aktuellerZustand=naechsterZustand;
 
-int Control::getKomandoAnzahl()
-{
-    //Anzahl der Komandos von Parser abfragen, für den progressBar
-    AnzahlBefehle=10;
-    return AnzahlBefehle;
 }
 
 void Control::StartControl()
 {
-    naechsterZustand=aktuellerZustand->ON();
-    ZustandAktualisieren();
 
-    naechsterZustand=aktuellerZustand->Move(10,10);
-    ZustandAktualisieren();
+aktuellerZustand=new StateBereit(nullptr,GUI);
+getKomandoAnzahl();
+naechsterZustand=aktuellerZustand->ON();
+
+}
+
+
+void Control::getKomandoAnzahl()
+{
+int X=10;
+    //Befehle vom Parser holen
+    GUI->GuiSetProgressBar(X);
+
+
 }
 
 
 
+State *Control::getAktuellerZustand() const
+{
+    return aktuellerZustand;
+}
+
+void Control::setAktuellerZustand(State *value)
+
+{
+    aktuellerZustand = value;
+}
 State *Control::getNaechsterZustand() const
 {
     return naechsterZustand;
 }
 
 void Control::setNaechsterZustand(State *value)
+
 {
     naechsterZustand = value;
 }
-
 State *Control::getLetzterZustand() const
 {
     return letzterZustand;
@@ -70,19 +72,3 @@ void Control::setLetzterZustand(State *value)
 {
     letzterZustand = value;
 }
-
-State *Control::getAktuellerZustand() const
-{
-    return aktuellerZustand;
-}
-
-void Control::setAktuellerZustand(State *value)
-{
-    aktuellerZustand = value;
-}
-
-
-
-
-
-

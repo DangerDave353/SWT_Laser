@@ -1,23 +1,34 @@
 #ifndef STATELASERAUS_H
 #define STATELASERAUS_H
+#include "state.h"
+#include "statebereit.h"
+#include "statelaseran.h"
+#include "statemove.h"
 
-#include"state.h"
-#include <iostream>
 class StateLaserAus : public State
 {
 private:
     int KoordinateX, KoordinateY;
     bool LaserZustand;
-    State* nexteState=nullptr;
-    State* currentState=nullptr;
-    State* lastState=nullptr;
+
+
+
 public:
-    StateLaserAus(State *state ,Ui::Main *ui);
+StateLaserAus();
+
+    StateLaserAus(State *state,Ui::MainWindow *ui);
+
+
     State *Move(int x, int y);
     State *Bereit();
     State *ON();
     State *OFF();
-
+    int getKoordinateX() const;
+    void setKoordinateX(int value);
+    int getKoordinateY() const;
+    void setKoordinateY(int value);
+    bool getLaserZustand() const;
+    void setLaserZustand(bool value);
 };
 
 #endif // STATELASERAUS_H

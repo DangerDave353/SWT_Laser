@@ -1,53 +1,78 @@
 #include "statebereit.h"
-#include "statelaseran.h"
-#include "statelaseraus.h"
-#include "statemove.h"
-#include "control.h"
-#include "main.h"
 
 
-using namespace std;
+StateBereit::StateBereit()
+{
 
-StateBereit::StateBereit(State* state, Ui::Main *ui)
+}
+
+StateBereit::StateBereit(State *state, Ui::MainWindow *ui)
 {
 GUI=ui;
-
-    if(state==nullptr)
-    {
+if(state==nullptr)
+{
     LaserZustand=false;
     KoordinateX=0;
     KoordinateY=0;
-    }
-    else
-    {
-        LaserZustand=state->getLaser();
-        KoordinateX=state->getX();
-        KoordinateY=state->getY();
-    }
-
-GUI->LaserAN();
+}
+else
+{
+    LaserZustand=state->getLaserZustand();
+    KoordinateX=state->getKoordinateX();
+    KoordinateY=state->getKoordinateY();
+}
 
 }
 
-State* StateBereit::Move(int x, int y)
+State *StateBereit::Move(int x, int y)
 {
-    cout<<"StateBereit->MOVE"<<endl;
+
     return new StateMove(x,y,this,GUI);
 }
 
-State* StateBereit::Bereit()
+State *StateBereit::Bereit()
 {
-    return new StateBereit(this,GUI);
+
+return  new StateBereit(this, GUI);
 }
 
-State* StateBereit::ON()
+State *StateBereit::ON()
 {
 
-    return new StateLaserAn(this,GUI);
-
+return new StateLaserAn(this,GUI);
 }
 
-State* StateBereit::OFF()
+State *StateBereit::OFF()
 {
-    return new StateBereit(this,GUI);
+return nextState;
+}
+
+int StateBereit::getKoordinateX() const
+{
+    return KoordinateX;
+}
+
+void StateBereit::setKoordinateX(int value)
+{
+    KoordinateX = value;
+}
+
+int StateBereit::getKoordinateY() const
+{
+    return KoordinateY;
+}
+
+void StateBereit::setKoordinateY(int value)
+{
+    KoordinateY = value;
+}
+
+bool StateBereit::getLaserZustand() const
+{
+    return LaserZustand;
+}
+
+void StateBereit::setLaserZustand(bool value)
+{
+    LaserZustand = value;
 }

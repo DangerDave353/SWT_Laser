@@ -1,65 +1,63 @@
 #include "state.h"
 
+
+
 State::State()
 {
-LaserZustand=0;
-KoordinateX=0;
-KoordinateY=0;
+
 }
 
-State::State(bool laserZustand, int x, int y,Ui::Main *ui)
+State::State(bool laserZustand, int x, int y, State *state)
 {
-    LaserZustand=laserZustand;
-    KoordinateX=x;
-    KoordinateY=y;
-    GUI=ui;
+
 }
 
-int State::getX()
+State *State::Move(int x, int y)
 {
-    return KoordinateX;
+return nullptr;
 }
 
-int State::getY()
+State *State::Bereit()
+{
+return nullptr;
+}
+
+State *State::ON()
+{
+return nullptr;
+}
+
+State *State::OFF()
+{
+return nullptr;
+}
+
+int State::getKoordinateY() const
 {
     return KoordinateY;
 }
 
-void State::setX(int x)
+void State::setKoordinateY(int value)
 {
-    KoordinateX=x;
+    KoordinateY = value;
 }
 
-void State::setY(int y)
+int State::getKoordinateX() const
 {
-    KoordinateY=y;
+    return KoordinateX;
 }
 
-bool State::getLaser()
+void State::setKoordinateX(int value)
+{
+    KoordinateX = value;
+}
+
+bool State::getLaserZustand() const
 {
     return LaserZustand;
 }
 
-void State::setLaser(bool zustand)
+void State::setLaserZustand(bool value)
 {
-    LaserZustand=zustand;
-}
-
-
-State* State::Move(int x, int y)
-{
-return nullptr;
-}
-
-State* State::ON()
-{
-return nullptr;
-}
-State* State::OFF()
-{
-return nullptr;
-}
-State* State::Bereit()
-{
-return nullptr;
+    LaserZustand = value;
 }

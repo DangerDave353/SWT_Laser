@@ -1,48 +1,79 @@
 #include "statelaseran.h"
-#include "state.h"
-#include "statebereit.h"
-#include "statelaseraus.h"
-#include "statemove.h"
-#include "control.h"
-#include "main.h"
-using namespace std;
 
-StateLaserAn::StateLaserAn(State* state, Ui::Main *ui)
+
+
+StateLaserAn::StateLaserAn()
 {
-    GUI=ui;
+
+}
+
+StateLaserAn::StateLaserAn(State *state,Ui::MainWindow *ui)
+{
+GUI=ui;
     if(state==nullptr)
     {
-    LaserZustand=false;
-    KoordinateX=0;
-    KoordinateY=0;
+        LaserZustand=false;
+        KoordinateX=0;
+        KoordinateY=0;
     }
     else
     {
         LaserZustand=true;
-        KoordinateX=state->getX();
-        KoordinateY=state->getY();
-
+        KoordinateX=state->getKoordinateX();
+        KoordinateY=state->getKoordinateY();
     }
 }
 
-State* StateLaserAn::Move(int x, int y)
+State *StateLaserAn::Move(int x, int y)
 {
-    cout<<"StateLaserAn->Move("<<x<<","<<y<<")"<<endl;
-    return new StateMove(x,y,this,GUI);
+
+return new StateMove(x,y,this,GUI);
 }
 
-State* StateLaserAn::Bereit()
+State *StateLaserAn::Bereit()
 {
-    return new StateLaserAn(this,GUI);
+
+return new StateBereit(this,GUI);
 }
 
-State* StateLaserAn::ON()
+State *StateLaserAn::ON()
 {
+
 return new StateLaserAn(this,GUI);
 }
 
-State* StateLaserAn::OFF()
+State *StateLaserAn::OFF()
 {
-    return new StateLaserAus(this,GUI);
+
+return new StateLaserAus(this,GUI);
 }
 
+int StateLaserAn::getKoordinateX() const
+{
+    return KoordinateX;
+}
+
+void StateLaserAn::setKoordinateX(int value)
+{
+    KoordinateX = value;
+}
+
+int StateLaserAn::getKoordinateY() const
+{
+    return KoordinateY;
+}
+
+void StateLaserAn::setKoordinateY(int value)
+{
+    KoordinateY = value;
+}
+
+bool StateLaserAn::getLaserZustand() const
+{
+    return LaserZustand;
+}
+
+void StateLaserAn::setLaserZustand(bool value)
+{
+    LaserZustand = value;
+}
