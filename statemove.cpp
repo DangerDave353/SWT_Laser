@@ -9,7 +9,7 @@ StateMove::StateMove()
 
 StateMove::StateMove(int x, int y, State *state,Ui::MainWindow *ui)
 {
-Gui=ui;
+//Gui=ui;
     if(state==nullptr)
     {
         LaserZustand=false;

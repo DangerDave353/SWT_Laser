@@ -1,13 +1,14 @@
 #include "control.h"
 
 
-Control::Control( Ui::MainWindow *ui)
+Control::Control( Ui::MainWindow *ui,MainWindow *w)
 {
     GUI=ui;
+window=w;
 letzterZustand=nullptr;
 aktuellerZustand=nullptr;
 naechsterZustand=nullptr;
-
+window->GuiAddProgressBar();
 }
 
 void Control::naechstenBefehl()
@@ -35,9 +36,8 @@ naechsterZustand=aktuellerZustand->ON();
 void Control::getKomandoAnzahl()
 {
 int X=10;
-    //Befehle vom Parser holen
-    GUI->GuiSetProgressBar(X);
 
+window->GuiSetProgressBar(X);
 
 }
 

@@ -25,13 +25,14 @@ private:
     int NeuX, NeuY;
 
 
-private slots:
+public slots:
     void Start();
     void Auswahl();
     void GuiLaserAN();
     void GuiLaserAUS();
     void GuiMove(bool LaserZustand, int x, int y);
     void GuiSetProgressBar(int max);
+    void GuiAddProgressBar();
 
 
 };

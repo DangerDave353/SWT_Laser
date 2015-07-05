@@ -16,12 +16,12 @@ private:
 State *aktuellerZustand;
 State *naechsterZustand;
 State *letzterZustand;
-
+MainWindow *window;
 int AnzahlBefehle;
 
 
 public:
-    Control(Ui::MainWindow *ui);
+    Control(Ui::MainWindow *ui, MainWindow *w);
     void naechstenBefehl();
     void ZustandAktualisieren();
     void getKomandoAnzahl();
