@@ -16,7 +16,7 @@ private:
 public:
 StateBereit();
 
-    StateBereit(State *state,  Ui::MainWindow *ui);
+    StateBereit(State *state,  MainWindow *w);
 
 
     State* Move(int x, int y);

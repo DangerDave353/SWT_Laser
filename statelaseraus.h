@@ -16,7 +16,7 @@ private:
 public:
 StateLaserAus();
 
-    StateLaserAus(State *state,Ui::MainWindow *ui);
+    StateLaserAus(State *state,MainWindow *w);
 
 
     State *Move(int x, int y);

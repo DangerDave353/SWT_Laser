@@ -11,7 +11,7 @@ protected:
     State* nextState;
     State* currentState;
     State* lastState;
- Ui::MainWindow *GUI;
+    MainWindow *GUI;
 
 public:
 

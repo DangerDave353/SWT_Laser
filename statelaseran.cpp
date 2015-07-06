@@ -7,9 +7,9 @@ StateLaserAn::StateLaserAn()
 
 }
 
-StateLaserAn::StateLaserAn(State *state,Ui::MainWindow *ui)
+StateLaserAn::StateLaserAn(State *state, MainWindow *w)
 {
-GUI=ui;
+    GUI=w;
     if(state==nullptr)
     {
         LaserZustand=false;
@@ -22,7 +22,11 @@ GUI=ui;
         KoordinateX=state->getKoordinateX();
         KoordinateY=state->getKoordinateY();
     }
+    GUI->GuiLaserAN();
+
 }
+
+
 
 State *StateLaserAn::Move(int x, int y)
 {

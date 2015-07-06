@@ -1,14 +1,16 @@
 #include "control.h"
 
 
-Control::Control( Ui::MainWindow *ui,MainWindow *w)
+
+
+Control::Control(MainWindow *w)
 {
-    GUI=ui;
+
 window=w;
 letzterZustand=nullptr;
 aktuellerZustand=nullptr;
 naechsterZustand=nullptr;
-window->GuiAddProgressBar();
+window->setC(this);
 }
 
 void Control::naechstenBefehl()
@@ -23,21 +25,85 @@ aktuellerZustand=naechsterZustand;
 
 }
 
-void Control::StartControl()
+void Control::StartControl(string pfad)
 {
 
-aktuellerZustand=new StateBereit(nullptr,GUI);
+parser = Parser(pfad);
+BefehlsObjekt= parser.getBefehlsObjekt();
+aktuellerZustand=new StateBereit(nullptr,window);
 getKomandoAnzahl();
-naechsterZustand=aktuellerZustand->ON();
+ControlBefehlsAusfuehrung();
+
+}
+
+void Control::ControlBefehlsAusfuehrung()
+{
+    /*
+    Die Cases sind Global mit der gleichen Nummer versehen, deshalb hier nochmal -1 obwohl er hier nicht benutzt wird
+
+    Cases:
+        -2	- Kommentar oder Leerzeile
+        -1	- EoF
+        0	- Fehler
+        1	- Laser
+        2	- Move
+    */
+
+    parser.naechsteZeile(); // wird einmal ausgeführt um bei zeile 1 zu starten
+    do
+    {
+        switch(BefehlsObjekt->getBefehlNr())
+        {
+        case '-2':break; //Kommentare und leere Zeilen werden ignoriert
+
+        case '0': break;  //Fehler werden momentan noch ignoriert
+                        //Können aber in späteren Versionen abgefangen werden
+
+
+        case '1':       //Laser wird An oder Aus geschaltet
+            if(BefehlsObjekt->getLaser())
+            {
+                naechsterZustand = aktuellerZustand->ON();
+                ZustandAktualisieren();
+            }
+            else
+            {
+                naechsterZustand =aktuellerZustand->OFF();
+                ZustandAktualisieren();
+                naechsterZustand=aktuellerZustand->Bereit();
+                ZustandAktualisieren();
+            }
+            break;
+
+        case '2':       //Ein Move befehl wurd gelesen, wenn der Laser An ist bleibt der Zustandsautomat im StateMove
+                        //ist der Laser Aus folgt der StateBereit
+
+            naechsterZustand =aktuellerZustand->Move(BefehlsObjekt->getX(),BefehlsObjekt->getY());
+            ZustandAktualisieren();
+            if(BefehlsObjekt->getLaser()==false)
+            {
+                naechsterZustand=aktuellerZustand->Bereit();
+                ZustandAktualisieren();
+            }
+            break;
+        default:break;
+        }
+
+
+        parser.naechsteZeile();
+    }while(BefehlsObjekt->getBefehlNr()==-1);
+}
+
+void Control::BefehlsObjektUebergeben()
+{
 
 }
 
 
 void Control::getKomandoAnzahl()
 {
-int X=10;
 
-window->GuiSetProgressBar(X);
+window->GuiSetProgressBar(parser.getAnzahlBefehle());
 
 }
 
@@ -72,3 +138,4 @@ void Control::setLetzterZustand(State *value)
 {
     letzterZustand = value;
 }
+

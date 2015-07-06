@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-//#include "control.h"
+
 #include <QMainWindow>
 
 
@@ -8,6 +8,8 @@
 namespace Ui {
 class MainWindow;
 }
+
+class Control;
 
 class MainWindow : public QMainWindow
 {
@@ -18,21 +20,26 @@ public:
     ~MainWindow();
 
     Ui::MainWindow *getUi() const;
-
-private:
-    Ui::MainWindow *ui;
-    int AltX, AltY;
-    int NeuX, NeuY;
-
-
-public slots:
-    void Start();
-    void Auswahl();
     void GuiLaserAN();
     void GuiLaserAUS();
     void GuiMove(bool LaserZustand, int x, int y);
     void GuiSetProgressBar(int max);
     void GuiAddProgressBar();
+
+
+
+    void setC(Control *value);
+
+private:
+    Ui::MainWindow *ui;
+    int AltX, AltY;
+    int NeuX, NeuY;
+    Control *C;
+
+public slots:
+    void Start();
+    void Auswahl();
+
 
 
 };

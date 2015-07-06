@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     statebereit.cpp \
     statelaseran.cpp \
     statelaseraus.cpp \
-    statemove.cpp
+    statemove.cpp \
+    befehl.cpp \
+    parser.cpp
 
 HEADERS  += mainwindow.h \
     state.h \
@@ -27,6 +29,8 @@ HEADERS  += mainwindow.h \
     statebereit.h \
     statelaseran.h \
     statelaseraus.h \
-    statemove.h
+    statemove.h \
+    befehl.h \
+    parser.h
 
 FORMS    += mainwindow.ui

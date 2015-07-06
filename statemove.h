@@ -17,7 +17,7 @@ private:
 public:
 StateMove();
 
-    StateMove(int x, int y, State *state,Ui::MainWindow *ui);
+    StateMove(int x, int y, State *state,MainWindow *w);
 
 
     State *Move(int x, int y);

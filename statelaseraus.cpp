@@ -7,9 +7,9 @@ StateLaserAus::StateLaserAus()
 
 }
 
-StateLaserAus::StateLaserAus(State *state,Ui::MainWindow *ui)
+StateLaserAus::StateLaserAus(State *state,MainWindow *w)
 {
-GUI=ui;
+GUI=w;
     if(state==nullptr)
     {
         LaserZustand=false;
@@ -22,6 +22,8 @@ GUI=ui;
         KoordinateX=state->getKoordinateX();
         KoordinateY=state->getKoordinateY();
     }
+
+GUI->GuiLaserAUS();
 }
 
 State *StateLaserAus::Move(int x, int y)

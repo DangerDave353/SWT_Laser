@@ -7,9 +7,9 @@ StateMove::StateMove()
 
 }
 
-StateMove::StateMove(int x, int y, State *state,Ui::MainWindow *ui)
+StateMove::StateMove(int x, int y, State *state,MainWindow *w)
 {
-//Gui=ui;
+GUI=w;
     if(state==nullptr)
     {
         LaserZustand=false;
@@ -22,6 +22,8 @@ StateMove::StateMove(int x, int y, State *state,Ui::MainWindow *ui)
         KoordinateX=x;
         KoordinateY=y;
     }
+
+GUI->GuiMove(LaserZustand,KoordinateX,KoordinateY);
 }
 
 State *StateMove::Move(int x, int y)

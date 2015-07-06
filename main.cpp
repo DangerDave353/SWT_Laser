@@ -8,9 +8,8 @@ int main(int argc, char *argv[])
     MainWindow w = MainWindow::MainWindow();
     MainWindow *W=&w;
     w.show();
-    Control C = Control(w.getUi(),W);
+    Control C = Control(W);
 
-    C.StartControl();
 
     return a.exec();
 

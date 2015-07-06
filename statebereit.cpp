@@ -6,9 +6,9 @@ StateBereit::StateBereit()
 
 }
 
-StateBereit::StateBereit(State *state, Ui::MainWindow *ui)
+StateBereit::StateBereit(State *state, MainWindow *w)
 {
-GUI=ui;
+GUI=w;
 if(state==nullptr)
 {
     LaserZustand=false;
@@ -44,7 +44,7 @@ return new StateLaserAn(this,GUI);
 
 State *StateBereit::OFF()
 {
-return nextState;
+return new StateLaserAus(this,GUI);
 }
 
 int StateBereit::getKoordinateX() const

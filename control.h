@@ -7,6 +7,8 @@
 #include "statelaseran.h"
 #include "statelaseraus.h"
 #include "statemove.h"
+#include "parser.h"
+#include "befehl.h"
 
 
 
@@ -18,15 +20,18 @@ State *naechsterZustand;
 State *letzterZustand;
 MainWindow *window;
 int AnzahlBefehle;
-
+Parser parser;
+Befehl *BefehlsObjekt;
 
 public:
-    Control(Ui::MainWindow *ui, MainWindow *w);
+    Control(MainWindow *w);
     void naechstenBefehl();
     void ZustandAktualisieren();
     void getKomandoAnzahl();
-    void StartControl();
+    void StartControl(string pfad);
+    void ControlBefehlsAusfuehrung();
 Ui::MainWindow *GUI;
+void BefehlsObjektUebergeben();
 
     Control *getControl() const;
     State *getLetzterZustand() const;
