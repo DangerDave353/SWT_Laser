@@ -1,16 +1,12 @@
 #include "state.h"
-
-
-
-State::State()
-{
-
-}
-
-State::State(bool laserZustand, int x, int y, State *state)
-{
-
-}
+/*
+In State wird die Oberklasse für die einzelnen späteren Zustände definiert
+Alle andern Zustände sind von dieser Klasse abgeleitet und beinhalten die selben
+Methoden und Attribute
+Die Methoden Move, Bereit, ON und OFF werden aufgerufen um in den nächsten Zustand zu wechseln, dabei geben
+sie einen Pointer auf den erstellten Zustand zurück.
+die restlichen Methoden sind Getter und Setter Methoden für die Attribute.
+*/
 
 State *State::Move(int x, int y)
 {

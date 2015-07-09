@@ -1,8 +1,17 @@
+/*
+Es gibt ein Object der Klasse Befehl. Es dient zu übergabe der Befehle vom Parser zur Control.
+Es beinhaltert nur Getter und Setter Methoden.
+
+*/
 #include "befehl.h"
 
 Befehl::Befehl()
 {
-
+BefehlNr=1;
+Fehler="";
+X=0;
+Y=0;
+Laser=false;
 }
 
 int Befehl::getBefehlNr()
@@ -45,12 +54,12 @@ void Befehl::setLaser(bool laser)
     Laser = laser;
 }
 
-string Befehl::getFehler()
+std::string Befehl::getFehler()
 {
     return(Fehler);
 }
 
-void Befehl::setFehler(string fehler)
+void Befehl::setFehler(std::string fehler)
 {
     Fehler = fehler;
 }

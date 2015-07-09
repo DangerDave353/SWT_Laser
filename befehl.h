@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-using namespace std;
+
 
 class Befehl
 {
@@ -14,10 +14,10 @@ private:
     int Y;
     bool Laser;
 
-    string Fehler;
+    std::string Fehler;
 public:
     Befehl();
-    ~Befehl();
+
     int getBefehlNr();
     void setBefehlNr(int BefehlNr);
     int getX();
@@ -26,8 +26,8 @@ public:
     void setY(int Y);
     bool getLaser();
     void setLaser(bool Laser);
-    string getFehler();
-    void setFehler(string Fehler);
+    std::string getFehler();
+    void setFehler(std::string Fehler);
 };
 
 #endif // BEFEHL_H

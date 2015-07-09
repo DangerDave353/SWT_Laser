@@ -1,9 +1,6 @@
 #ifndef STATEMOVE_H
 #define STATEMOVE_H
 #include "state.h"
-#include "statebereit.h"
-#include "statelaseran.h"
-#include "statelaseraus.h"
 
 
 class StateMove : public State

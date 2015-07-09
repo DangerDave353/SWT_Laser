@@ -1,9 +1,7 @@
 #ifndef STATELASERAUS_H
 #define STATELASERAUS_H
 #include "state.h"
-#include "statebereit.h"
-#include "statelaseran.h"
-#include "statemove.h"
+
 
 class StateLaserAus : public State
 {

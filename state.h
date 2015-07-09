@@ -15,21 +15,17 @@ protected:
 
 public:
 
-    State();
-    State(bool laserZustand, int x, int y, State *state);
-
-
     virtual State* Move(int x, int y);
     virtual State* Bereit();
     virtual State* ON();
     virtual State* OFF();
 
-    int getKoordinateY() const;
-    void setKoordinateY(int value);
-    int getKoordinateX() const;
-    void setKoordinateX(int value);
-    bool getLaserZustand() const;
-    void setLaserZustand(bool value);
+    virtual int getKoordinateY() const;
+    virtual void setKoordinateY(int value);
+    virtual int getKoordinateX() const;
+    virtual void setKoordinateX(int value);
+    virtual bool getLaserZustand() const;
+    virtual void setLaserZustand(bool value);
 };
 
 

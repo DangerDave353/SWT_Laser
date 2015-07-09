@@ -1,5 +1,14 @@
+/*
+Der Zustand Bereit ist der Grundzustand, das Programm startet immer hier.
+Der Laser ist in diesem Zustand immer Aus.
+Von Bereit kann mit ON in LaserAn gewechselt werden.
+Bei einem MOVE Befehl wird in den Zustand MOVE gewechselt, aber der Zustand spring dannach sofort wieder
+in Bereit. Das entspricht einer Bewegung bei ausgeschaltetem Laser.
+*/
 #include "statebereit.h"
-
+#include "statelaseran.h"
+#include "statelaseraus.h"
+#include "statemove.h"
 
 StateBereit::StateBereit()
 {
@@ -33,7 +42,7 @@ State *StateBereit::Move(int x, int y)
 State *StateBereit::Bereit()
 {
 
-return  new StateBereit(this, GUI);
+return  this;
 }
 
 State *StateBereit::ON()
@@ -44,7 +53,7 @@ return new StateLaserAn(this,GUI);
 
 State *StateBereit::OFF()
 {
-return new StateLaserAus(this,GUI);
+return this;
 }
 
 int StateBereit::getKoordinateX() const

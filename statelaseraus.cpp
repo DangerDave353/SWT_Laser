@@ -1,5 +1,11 @@
+/*
+Hier wird der Laser ausgeschaltet. Nach diesem Zustand soll automatisch in Bereit
+gewechselt werden.
+*/
 #include "statelaseraus.h"
-
+#include "statebereit.h"
+#include "statelaseran.h"
+#include "statemove.h"
 
 
 StateLaserAus::StateLaserAus()

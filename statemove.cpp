@@ -1,5 +1,13 @@
+/*
+In diesem Zustand findet die bewegung statt, unabhängig von Zustand des Lasers.
+Von hier aus soll nur zu einem neuen MOVE oder LaserAus gewechselt werden können.
+*/
 #include "statemove.h"
 
+
+#include "statebereit.h"
+#include "statelaseran.h"
+#include "statelaseraus.h"
 
 
 StateMove::StateMove()
@@ -41,7 +49,7 @@ return new StateBereit(this,GUI);
 State *StateMove::ON()
 {
 
-return new StateLaserAn(this,GUI);
+return this;
 }
 
 State *StateMove::OFF()

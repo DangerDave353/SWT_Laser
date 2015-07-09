@@ -22,15 +22,15 @@ void interpretiere(string Zeile)
 Filtert aus dem Übergebenen String den jeweiligen Befehl herraus und Schreibt ihn in das Befehlsobjekt.
 
 */
-#include "Parser.h"
-#include "Befehl.h"
+#include "parser.h"
+#include "befehl.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <ctype.h>
 #include <algorithm>
 
-using namespace std;
+
 
 
 
@@ -38,11 +38,11 @@ Parser::Parser()
 {
 }
 
-Parser::Parser(string pfad)
+Parser::Parser(std::string pfad)
 {
     //Kontruktor
     Pfad = pfad; //übergebener Pfad wird global gespeichert
-    befehl = Befehl::Befehl(); //Befehlsobjekt wird erzeugt
+    //befehl = Befehl::Befehl(); //Befehlsobjekt wird erzeugt
 
 }
 
@@ -53,18 +53,19 @@ Befehl* Parser::getBefehlsObjekt()
 
 void Parser::naechsteZeile()
 {
-    fstream OPCodes;
-    OPCodes.open(Pfad, ios::in);	//öffnen des Lesestreams
+    std::fstream OPCodes;
+
+    OPCodes.open(Pfad, std::ios::in);	//öffnen des Lesestreams
 
     //Springen zur richtigen Zeile und auslesen
     for (int i = 0; i < aktuelleZeile; i++)
     {
-        getline(OPCodes, Zeile); //Auslesen in die Variable Zeile
+        std::getline(OPCodes, Zeile); //Auslesen in die Variable Zeile
     }
     //--
 
     //Umwandlung von lowercase in uppercase
-    for (int i = 0; i < Zeile.length(); i++)
+    for (unsigned int i = 0; i < Zeile.length(); i++)
     {
         Zeile[i] = toupper(Zeile[i]);
     }
@@ -99,10 +100,10 @@ void Parser::naechsteZeile()
 
 }
 
-void Parser::interpretiere(string Zeile)
+void Parser::interpretiere(std::string Zeile)
 {
-    string ErstesZeichen;
-    string Kriterium;
+    std::string ErstesZeichen;
+    std::string Kriterium;
     int Case;
     /*
 
@@ -123,7 +124,7 @@ void Parser::interpretiere(string Zeile)
     }
     else
     {
-        ErstesZeichen = "";
+        ErstesZeichen = "\0";
     }
     //--
 
@@ -132,11 +133,11 @@ void Parser::interpretiere(string Zeile)
     {
         Case = -2;
     }
-    else if (Zeile.find("LASER") != string::npos)	//Laser
+    else if (Zeile.find("LASER") != std::string::npos)	//Laser
     {
         Case = 1;
     }
-    else if (Zeile.find("MOVE") != string::npos)	//Move
+    else if (Zeile.find("MOVE") != std::string::npos)	//Move
     {
         Case = 2;
     }
@@ -172,7 +173,7 @@ void Parser::interpretiere(string Zeile)
         befehl.setBefehlNr(1);
 
         //on oder off unterscheidung
-        if (Zeile.find("ON") != string::npos)
+        if (Zeile.find("ON") != std::string::npos)
         {
             //on setzen
 
@@ -181,7 +182,7 @@ void Parser::interpretiere(string Zeile)
             befehl.setLaser(true);
 
         }
-        else if (Zeile.find("OFF") != string::npos)
+        else if (Zeile.find("OFF") != std::string::npos)
         {
             //off setzen
 
@@ -211,8 +212,8 @@ void Parser::interpretiere(string Zeile)
         int Xlaenge;
         int Ylaenge;
         int x,y;
-        string strX;
-        string strY;
+        std::string strX;
+        std::string strY;
 
         //ermittlung X anfang
         bool xAnfangExist = false;
@@ -325,15 +326,15 @@ int Parser::getAnzahlBefehle()
 {
     int Anzahl = 0;
 
-    fstream OPCodes;
-    OPCodes.open(Pfad, ios::in);	//öffnen des Lesestreams
-    string HilfsZeile;
-    string ErstesZeichen;
+    std::fstream OPCodes;
+    OPCodes.open(Pfad, std::ios::in);	//öffnen des Lesestreams
+    std::string HilfsZeile;
+    std::string ErstesZeichen;
 
     //Inkrementierung der Anzahl
     while (!OPCodes.eof()) //wiederholen bis EoF erreicht ist
     {
-        getline(OPCodes, HilfsZeile);	//auslesen der Zeile
+        std::getline(OPCodes, HilfsZeile);	//auslesen der Zeile
 
         //Umwandlung von lowercase in uppercase
         for (int i = 0; i < HilfsZeile.length(); i++)
@@ -341,30 +342,31 @@ int Parser::getAnzahlBefehle()
             HilfsZeile[i] = toupper(HilfsZeile[i]);
         }
         //--
-
+std::cout<<"HilfsZeile="<<HilfsZeile<<std::endl;
         //Auslese des ersten Zeichens
-        if (HilfsZeile != "")
+        if (HilfsZeile.length()>1)
         {
             ErstesZeichen = HilfsZeile.at(0); //Auslesen des ersten Zeichens falls nicht leer
         }
         else
         {
-            ErstesZeichen = "";
+            ErstesZeichen = "\0";
         }
         //--
 
         int Case;
-
+ std::cout<<"Fehler:"<<ErstesZeichen<<std::endl;
         //Herausfinden ob oder welcher gültige Befehl sich im String befindet
-        if (ErstesZeichen == "#" || ErstesZeichen == "\0")	//Kommentarabfrage
-        {
+        //if (ErstesZeichen == "#" || ErstesZeichen == "\0" || ErstesZeichen == ""||ErstesZeichen=="\n")	//Kommentarabfrage
+        if(ErstesZeichen.length()==0||ErstesZeichen=="#")
+ {
             Case = -2;
         }
-        else if (HilfsZeile.find("LASER") != string::npos)	//Laser
+        else if (HilfsZeile.find("LASER") != std::string::npos)	//Laser
         {
             Case = 1;
         }
-        else if (HilfsZeile.find("MOVE") != string::npos)	//Move
+        else if (HilfsZeile.find("MOVE") != std::string::npos)	//Move
         {
             Case = 2;
         }
@@ -381,8 +383,8 @@ int Parser::getAnzahlBefehle()
             //cout << "Undefinierter Case" << endl; //Debugausgabe
             break;
         case 0:
-            //cout << "Fehler" << endl;	//Debugausgabe
-
+                //Debugausgabe
+            std::cout<<"Fehler:"<<ErstesZeichen<<std::endl;
             befehl.setFehler(befehl.getFehler() + "\nUngültiger Befehl in Zeile: " + HilfsZeile);
             befehl.setBefehlNr(0);
 
@@ -397,7 +399,7 @@ int Parser::getAnzahlBefehle()
             //cout << "Laser" << endl;	//Debugausgabe
 
             //on oder off unterscheidung
-            if (HilfsZeile.find("ON") != string::npos)
+            if (HilfsZeile.find("ON") != std::string::npos)
             {
                 //on setzen
 
@@ -405,7 +407,7 @@ int Parser::getAnzahlBefehle()
                 Anzahl++;
 
             }
-            else if (HilfsZeile.find("OFF") != string::npos)
+            else if (HilfsZeile.find("OFF") != std::string::npos)
             {
                 //off setzen
 
@@ -433,8 +435,8 @@ int Parser::getAnzahlBefehle()
             int Xlaenge;
             int Ylaenge;
             int x, y;
-            string strX;
-            string strY;
+            std::string strX;
+            std::string strY;
 
             //ermittlung X anfang
             bool xAnfangExist = false;
@@ -526,10 +528,5 @@ int Parser::getAnzahlBefehle()
 
     OPCodes.close();
     return(Anzahl);
-
-}
-
-Parser::~Parser()
-{
 
 }

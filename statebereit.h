@@ -1,9 +1,7 @@
 #ifndef STATEBEREIT_H
 #define STATEBEREIT_H
 #include "state.h"
-#include "statelaseran.h"
-#include "statelaseraus.h"
-#include "statemove.h"
+
 
 class StateBereit : public State
 {

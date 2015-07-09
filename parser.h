@@ -4,29 +4,28 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Befehl.h"
+#include "befehl.h"
 #include <ctype.h>
 #include <algorithm>
+
 
 class Parser
 {
 private:
-    string Pfad;
-    string Zeile;
+    std::string Pfad;
+    std::string Zeile;
     int aktuelleZeile=1;
 
     Befehl befehl;
 
 public:
     Parser();
-    Parser(string pfad);
+    Parser(std::string pfad);
 
-        void naechsteZeile();
-        void interpretiere(string Zeile);
-        Befehl* getBefehlsObjekt();
-        int getAnzahlBefehle();
-
-        ~Parser();
+    void naechsteZeile();                   // Aktualisiert this->befehl
+    void interpretiere(std::string Zeile);  // Liest Befehl aus Zeile?/Text?
+    Befehl* getBefehlsObjekt();
+    int getAnzahlBefehle();
 };
 
 #endif // PARSER_H

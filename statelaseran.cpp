@@ -1,5 +1,11 @@
+/*
+Hier wird der Laser angeschaltet.
+Von diesem Zustand kann nur in MOVE oder LaserAus gewechselt werden.
+*/
 #include "statelaseran.h"
-
+#include "statebereit.h"
+#include "statelaseraus.h"
+#include "statemove.h"
 
 
 StateLaserAn::StateLaserAn()
@@ -37,13 +43,13 @@ return new StateMove(x,y,this,GUI);
 State *StateLaserAn::Bereit()
 {
 
-return new StateBereit(this,GUI);
+return this;
 }
 
 State *StateLaserAn::ON()
 {
 
-return new StateLaserAn(this,GUI);
+return this;
 }
 
 State *StateLaserAn::OFF()

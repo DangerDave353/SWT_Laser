@@ -3,10 +3,6 @@
 #include "mainwindow.h"
 #include <iostream>
 #include "state.h"
-#include "statebereit.h"
-#include "statelaseran.h"
-#include "statelaseraus.h"
-#include "statemove.h"
 #include "parser.h"
 #include "befehl.h"
 
@@ -15,24 +11,24 @@
 class Control
 {
 private:
-State *aktuellerZustand;
+State *aktuellerZustand;    //pointer auf die Zustände
 State *naechsterZustand;
 State *letzterZustand;
-MainWindow *window;
+MainWindow *window;         //pointer auf dui GUI
 int AnzahlBefehle;
 Parser parser;
-Befehl *BefehlsObjekt;
+Befehl *BefehlsObjekt;      //pointer auf das Befehlsobjekt
+
 
 public:
     Control(MainWindow *w);
-    void naechstenBefehl();
     void ZustandAktualisieren();
     void getKomandoAnzahl();
-    void StartControl(string pfad);
+    void StartControl(std::string pfad);
     void ControlBefehlsAusfuehrung();
-Ui::MainWindow *GUI;
-void BefehlsObjektUebergeben();
 
+
+//Getter und Setter Methoden
     Control *getControl() const;
     State *getLetzterZustand() const;
     void setLetzterZustand(State *value);
