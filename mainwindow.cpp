@@ -5,7 +5,6 @@
 #include <QPen>
 #include <QString>
 #include <QLineEdit>
-#include <unistd.h>
 #include <QTime>
 #include <QFileDialog>
 #include <QDialogButtonBox>

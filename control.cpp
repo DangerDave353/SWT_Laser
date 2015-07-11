@@ -11,6 +11,7 @@ der Statemaschine und gibt die anweisungen an die GUI(MainWindow).
 #include "statemove.h"
 
 
+
 //Im Konstructor werden die Zustände auf NULL gesetzt und das MainWindow übergeben
 //ebenfalls wird dem MainWindow das Control Objekt übergeben, damit die beiden sich gegeseitig kennen.
 Control::Control(MainWindow *w)
