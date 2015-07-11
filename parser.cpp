@@ -330,6 +330,7 @@ int Parser::getAnzahlBefehle()
     OPCodes.open(Pfad, std::ios::in);	//öffnen des Lesestreams
     std::string HilfsZeile;
     std::string ErstesZeichen;
+    befehl.setFehler("");
 
     //Inkrementierung der Anzahl
     while (!OPCodes.eof()) //wiederholen bis EoF erreicht ist
